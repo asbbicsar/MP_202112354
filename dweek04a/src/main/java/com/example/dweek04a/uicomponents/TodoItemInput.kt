@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dweek04a.model.Item
@@ -26,13 +27,12 @@ fun TodoItemInput(todoList: MutableList<Item>, modifier: Modifier = Modifier) {
             onValueChange = { textState = it }
         )
         Button(onClick = {
-            todoList.add(
-                Item(
-                    textState, LocalDateTime
-                        .now()
-                        .format(DateTimeFormatter.ofPattern("MM-dd HH:mm"))
-                )
+            val newItem = Item(
+                textState, LocalDateTime
+                    .now()
+                    .format(DateTimeFormatter.ofPattern("MM-dd HH:mm"))
             )
+            todoList.add(newItem)
             textState = ""
         }) {
             Text(text = "추가")
